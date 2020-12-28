@@ -12,7 +12,8 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornaValorSuperiorMaisProximoDadoLeilaoNessaModalidade(double valorDestino, double valorEsperado, double[] ofertas)
         {
             // Arrange
-            var leilao = new Leilao("Van Gogh", valorDestino);
+            IModalidadeAvaliacao modalidade = new OfertaSuperiorMaisProxima(valorDestino);
+            var leilao = new Leilao("Van Gogh", modalidade);
             var fulano = new Interessada("Fulano", leilao);
             var maria = new Interessada("Maria", leilao);
 
@@ -38,7 +39,8 @@ namespace Alura.LeilaoOnline.Tests
         public void LancaInvalidOperationExceptionDadoPregaoNaoIniciado()
         {
             // Arrange
-            var leilao = new Leilao("Van Gogh");
+            IModalidadeAvaliacao modalidade = new MaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
 
             var exceptionObitida = Assert.Throws<InvalidOperationException>(() => {
                 // Act
@@ -55,7 +57,8 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornaZeroDadoLeilaoSemLances()
         {
             // Arrange
-            var leilao = new Leilao("Van Gogh");
+            IModalidadeAvaliacao modalidade = new MaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
 
             leilao.IniciaPregao();
             
@@ -77,7 +80,8 @@ namespace Alura.LeilaoOnline.Tests
         public void RetornaMaiorValorDadodLeilaoComPeloMenosUmLance(double valorEsperado, double[] ofertas )
         {
             // Arrange
-            var leilao = new Leilao("Van Gogh");
+            IModalidadeAvaliacao modalidade = new MaiorValor();
+            var leilao = new Leilao("Van Gogh", modalidade);
             var fulano = new Interessada("Fulano", leilao);
             var maria = new Interessada("Maria", leilao);
 

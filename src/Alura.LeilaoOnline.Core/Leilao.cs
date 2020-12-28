@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -46,6 +47,9 @@ namespace Alura.LeilaoOnline.Core
 
         public void TerminaPregao()
         {
+            if(Estado != EstadoLeilao.LeilaoEmAndamento)
+                throw new InvalidOperationException();
+                
             Ganhador = Lances
                 .DefaultIfEmpty(new Lance(null, 0))
                 .OrderBy(l => l.Valor)

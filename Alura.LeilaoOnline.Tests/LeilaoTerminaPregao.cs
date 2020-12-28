@@ -11,18 +11,12 @@ namespace Alura.LeilaoOnline.Tests
         {
             // Arrange
             var leilao = new Leilao("Van Gogh");
-            
-            try
-            {
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(() => {
                 // Act
                 leilao.TerminaPregao();
-                Assert.True(false);
-            }
-            catch (Exception e)
-            {
-                // Assert
-                Assert.IsType<InvalidOperationException>(e);
-            }
+            });
         }
 
         [Fact]
@@ -30,6 +24,8 @@ namespace Alura.LeilaoOnline.Tests
         {
             // Arrange
             var leilao = new Leilao("Van Gogh");
+
+            leilao.IniciaPregao();
             
             // Act
             leilao.TerminaPregao();

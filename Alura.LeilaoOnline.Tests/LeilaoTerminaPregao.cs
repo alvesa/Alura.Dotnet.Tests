@@ -12,11 +12,15 @@ namespace Alura.LeilaoOnline.Tests
             // Arrange
             var leilao = new Leilao("Van Gogh");
 
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => {
+            var exceptionObitida = Assert.Throws<InvalidOperationException>(() => {
                 // Act
                 leilao.TerminaPregao();
             });
+
+            var msgEsperada = "Não é possivel terminar o pregao sem que ele tenha começado. Para isso inicie o metodo iniciaPregao";
+             
+            // Assert
+            Assert.Equal(msgEsperada, exceptionObitida.Message);
         }
 
         [Fact]

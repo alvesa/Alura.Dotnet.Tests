@@ -48,8 +48,8 @@ namespace Alura.LeilaoOnline.Core
         public void TerminaPregao()
         {
             if(Estado != EstadoLeilao.LeilaoEmAndamento)
-                throw new InvalidOperationException();
-                
+                throw new InvalidOperationException("Não é possivel terminar o pregao sem que ele tenha começado. Para isso inicie o metodo iniciaPregao");
+
             Ganhador = Lances
                 .DefaultIfEmpty(new Lance(null, 0))
                 .OrderBy(l => l.Valor)
